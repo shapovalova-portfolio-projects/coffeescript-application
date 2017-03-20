@@ -1,53 +1,9 @@
-$default-font-size = 16
-
-$em( value, baseValue = $default-font-size ) {
-	var u = unit(value);
-	return (u is 'px') ? unit(value/baseValue, 'em') : unit(value, u)
-}
-
-$rem( value, baseValue = $default-font-size ) {
-	var u = unit(value);
-	return (u is 'px') ? unit(value/baseValue, 'rem') : unit(value, u)
-}
-color_brand_white       = #fff
-color_brand_black       = #000
-color_brand_red         = #f00
-color_dark_blue         = #17479e
-color_light_blue        = #53c0ef
-color_brand_light_blue  = #e2eaf4
-color_brand_light_blue2 = #c6d7ea
-color_brand_blue_dark   = #21409A
-color_brand_blue        = #5e95c9
-color_brand_blue2       = #66a1de
-color_light_blue_2      = #4967AB
-color_light_blue_3      = #6196CE
-color_light_blue_4      = #70ACDD
-color_light_blue_5      = #8AC1E9
-color_light_blue_6      = #AED9F5
-color_light_blue_7      = #456cb1
-color_brand_blue_bell   = #9c9fd2
-color_light_grey        = #cccccc
-color_light_grey_2      = #D6D6D6
-color_light_grey_3      = #e0dfdf
-color_light_grey_4      = #eeeae9
-color_light_grey_5      = #eeeef9
-color_light_grey_6      = #e2e3f2
-color_brand_light_gray  = #E0E0E0
-color_dark_grey         = #666666
-color_aptamil_purple    = #9799cb
-color_aptamil_purple_2  = #DDDEEF
-color_brand_orange      = #ffc900
-color_brand_light_yellow= #fffda9
-color_brand_yellow      = #fffb78
-color_brand_light_gray1 = #e5e5e5
-color_brand_light_gray2 = #f5f5f5
-color_brand_green       = #009b78
-color_brand_light_green = #e0fee1
-color_brand_blue_8      = #5f95c9
-color_brand_blue_9      = #66a1dd
+color_blue        = #5e95c9
+color_orange      = #ffc900
+color_light_yellow= #fffda9
+color_yellow      = #fffb78
 $backgroundColour = color_brand_white
-$borderColour = color_dark_blue
-$path = '../../shared/images/'
+$borderColour = #17479e
 
 setTooltipColour($backgroundColour, $borderColour, $opacity)
 	border-color $borderColour
@@ -73,7 +29,7 @@ setTooltipColour($backgroundColour, $borderColour, $opacity)
 		&:after
 			border-bottom-color rgba($backgroundColour, $opacity)
 
-.ah-tooltip
+.tooltip-functionality
 	opacity 0
 	pointer-events none
 	&.show
@@ -160,11 +116,11 @@ setTooltipColour($backgroundColour, $borderColour, $opacity)
 			&:after
 				border $rem(12px) solid transparent
 		&.yellow
-			setTooltipColour(color_brand_yellow, color_brand_orange, .95)
+			setTooltipColour(color_yellow, color_orange, .95)
 		&.light-blue
-			setTooltipColour(color_brand_light_blue, color_brand_blue, .95)
+			setTooltipColour(lightblue, color_blue, .95)
 		&.light-yellow
-			setTooltipColour(color_brand_light_yellow, color_brand_orange, .95)
+			setTooltipColour(color_light_yellow, color_orange, .95)
 		.tooltip-item
 			position relative
 			padding-left $rem(94px)
@@ -182,4 +138,3 @@ button.minus
 	position absolute
 	width $rem(35px)
 	height $rem(35px)
-	background url($path + 'minus.png') 0 0 / 100% auto no-repeat

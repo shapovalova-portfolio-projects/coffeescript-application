@@ -3,7 +3,7 @@
 		$openClass = 'open-tooltip-';
 
 mixin addTooltip(tooltip)
-	.ah-tooltip(data-module='ah-tooltip' id=$id+tooltip.number open=$openClass+tooltip.number)
+	.tooltip-functionality(id=$id+tooltip.number open=$openClass+tooltip.number)
 		-
 			$classes = tooltip.position;
 			if(tooltip.colour)
