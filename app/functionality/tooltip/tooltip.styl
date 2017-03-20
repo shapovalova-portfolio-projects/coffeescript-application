@@ -39,9 +39,9 @@ setTooltipColour($backgroundColour, $borderColour, $opacity)
 		transition 100ms opacity linear
 	.tooltip
 		position absolute
-		padding $rem(15px)
+		padding 15px
 		background $backgroundColour
-		border $rem(1px) solid $borderColour
+		border 1px solid $borderColour
 		z-index 1
 		&:before
 		&:after
@@ -53,9 +53,9 @@ setTooltipColour($backgroundColour, $borderColour, $opacity)
 			background transparent
 			transform-origin center
 		&:before
-			border-width $rem(17px)
+			border-width 17px
 		&:after
-			border-width $rem(16px)
+			border-width 16px
 		&.right
 		&.left
 			transform translate3d(0,-50%,0)
@@ -112,9 +112,9 @@ setTooltipColour($backgroundColour, $borderColour, $opacity)
 		&.light-blue
 		&.light-yellow
 			&:before
-				border $rem(13px) solid transparent
+				border 13px solid transparent
 			&:after
-				border $rem(12px) solid transparent
+				border 12px solid transparent
 		&.yellow
 			setTooltipColour(color_yellow, color_orange, .95)
 		&.light-blue
@@ -123,7 +123,7 @@ setTooltipColour($backgroundColour, $borderColour, $opacity)
 			setTooltipColour(color_light_yellow, color_orange, .95)
 		.tooltip-item
 			position relative
-			padding-left $rem(94px)
+			padding-left 94px
 			width 100%
 			.arrow
 			.item-type
@@ -132,9 +132,14 @@ setTooltipColour($backgroundColour, $borderColour, $opacity)
 			.arrow
 				left 0
 			.item-type
-				left $rem(45px)
+				left 45px
 
 button.minus
 	position absolute
-	width $rem(35px)
-	height $rem(35px)
+	&:after
+		content '-'
+		position absolute
+		left 50%
+		top 50%
+		transform translate3d(-50%, -50%, 0)
+		color white
