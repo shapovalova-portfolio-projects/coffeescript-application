@@ -18,9 +18,9 @@ class Structure
 
   addMenuButtonsHandler: (menu)->
     @menuBack.addEventListener 'click', =>
-      @goToPage window.currentSlideIndex-1
+      @goToPrevPage()
     @menuNext.addEventListener 'click', =>
-      @goToPage window.currentSlideIndex+1
+      @goToNextPage()
 
   checkMenuButtons: ()->
     @menuBack.classList.remove 'hidden'
@@ -29,6 +29,14 @@ class Structure
       @menuBack.classList.add 'hidden'
     else if window.currentSlideIndex is @pages.length-1
       @menuNext.classList.add 'hidden'
+
+  goToPrevPage: ()->
+    if window.currentSlideIndex isnt 0
+      @goToPage window.currentSlideIndex-1
+
+  goToNextPage: ()->
+    if window.currentSlideIndex isnt @pages.length-1
+      @goToPage window.currentSlideIndex+1
 
   goToPage: (index)->
     @pages[window.currentSlideIndex].classList.remove 'active'

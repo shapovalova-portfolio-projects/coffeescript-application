@@ -4,7 +4,7 @@ $setTooltipsTopPosition
 	figure
 		for $figureTooltips, index in $tooltipsTopPosition
 			&:nth-of-type({index+1})
-				.ah-tooltip
+				.tooltip-functionality
 					for $top, ind in $figureTooltips
 						&:nth-child({ind+1})
 							.tooltip
@@ -21,30 +21,29 @@ $showElement
 		pointer-events auto
 $showStepsOnStateChange
 	for $step in $steps
-		&.state-
-			&{$step}
-				.steps-wrapper
-					opacity 1
-				$dataStep = 'data-step=' + $step
-				.step[{$dataStep}]
-					@extends $showElement
+		&.{$step}
+			.steps-wrapper
+				opacity 1
+			$dataStep = 'data-step=' + $step
+			.step[{$dataStep}]
+				@extends $showElement
 
 $setblocksColors
 	figure
-		&.non-ige
+		&.type3
 			figcaption
 				background orange
 			.blocks
 				border-color orange
 			.plus
 				background orange
-		&.mild.non-ige
+		&.type1.type3
 			.blocks
 				background yellow
-		&.severe.non-ige
+		&.type2.type3
 			.blocks
 				background yellow
-		&.mild.ige
+		&.type1.type4
 			figcaption
 				background #5e95c9
 			.blocks
@@ -52,7 +51,7 @@ $setblocksColors
 				border-color #5e95c9
 			.plus
 				background #5e95c9
-		&.severe.ige
+		&.type2.type4
 			figcaption
 				background #4967AB
 			.blocks
@@ -66,9 +65,8 @@ $setPlusElements
 		transform translate3d(0, -50%, 0)
 		width 21px
 		height @width
-		mask url(../../shared/images/plus.png) top left / cover
 		&.active
-			mask url(../../shared/images/minus.png) top left / cover
+			transform rotate3d(0, 0, 1, 225deg) translate3d(0,-50%,0)
 
 $setArrowElements
 	.arrow
@@ -84,20 +82,23 @@ $setArrowElements
 		&.next
 			bottom 0
 			right 0
-			background #666666
+			background #666
 
 #map
 	@extends $setArrowElements
 	padding 23px 40px 73px 55px
+	background url(../images/map/map-background.jpg) center bottom / 100% auto no-repeat, black
 	h1
 		margin-bottom 19px
 		padding 0 30px 0 0
 		font 400 1.64rem / 1.35 Audiowide
+		color white
 	b
 		font-weight 400
 	.lead-text
 		margin-bottom 30px
 		font-size 1.25rem
+		color white
 	.no-wrap
 		white-space nowrap
 	.content-wrapper
@@ -119,7 +120,7 @@ $setArrowElements
 			height 18.2%
 			padding 13px 10px
 			font 400 1.1rem / 1 Audiowide
-		&.mild.ige
+		&.type1.type4
 			.tooltip
 				width 240px
 	.blocks
@@ -147,6 +148,7 @@ $setArrowElements
 		padding-right 23px
 		width 100%
 		height 21px
+		box-sizing border-box
 		p
 			margin-bottom 0
 			font-weight 400
