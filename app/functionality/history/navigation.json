@@ -1,0 +1,68 @@
+{
+	"map": {
+		"step1": {
+			"next": [
+				"step9",
+				"step2"
+			]
+		},
+		"step2": {
+			"next": [
+				"step8",
+				"step3"
+			]
+		},
+		"step3": {
+			"next": [
+				"step4"
+			]
+		},
+		"step4": {
+			"next": [
+				"step5",
+				"step8"
+			]
+		},
+		"step5": {
+			"next": [
+				"step13",
+				"step14",
+				"step15"
+			]
+		},
+		"step6": {
+		},
+		"step7": {
+		},
+		"step8": {
+		},
+		"step9": {
+			"next": [
+				"step12",
+				"step10"
+			]
+		},
+		"step10": {
+			"next": [
+				"step11"
+			]
+		},
+		"step11": {
+			"next": [
+				"step5",
+				"step12"
+			]
+		},
+		"step12": {
+		},
+		"step13": {
+			"back": "step5"
+		},
+		"step14": {
+			"back": "step5"
+		},
+		"step15": {
+			"back": "step5"
+		}
+	}
+}

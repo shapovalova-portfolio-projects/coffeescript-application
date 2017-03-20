@@ -1,0 +1,29 @@
+-
+	var $id = 'tooltip',
+		$openClass = 'open-tooltip-';
+
+mixin addTooltip(tooltip)
+	.ah-tooltip(data-module='ah-tooltip' id=$id+tooltip.number open=$openClass+tooltip.number)
+		-
+			$classes = tooltip.position;
+			if(tooltip.colour)
+				$classes += ' ' + tooltip.colour;
+		.tooltip(class=$classes)
+			if tooltip.text
+				each paragraph in tooltip.text
+					p !{paragraph}
+			if tooltip.items
+				each tooltipItem in tooltip.items
+					.tooltip-item
+						if tooltipItem.openPopup
+							.arrow(data-popup=tooltipItem.openPopup)
+						if tooltipItem.type
+							.item-type(class=tooltipItem.type)
+						p !{tooltipItem.text}
+			if tooltip.footnote
+				p.tooltip-note !{tooltip.footnote}
+
+mixin addTooltipButton(tooltip)
+	.item-with-tooltip
+		p !{tooltip.name}
+		button(class=tooltip.buttonClass + ' ' + $openClass+tooltip.number)
