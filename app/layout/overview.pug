@@ -1,0 +1,47 @@
+include text/overview-text
+-
+	var $modules = [
+			{
+				slide: { collection: "your_data_collection",  slideshow: "your_data_slideshow", id: "YourDataSlide" }
+			},
+			{
+				slide: { collection: "product_catalogue_collection", slideshow: "product_catalogue_slideshow", id: "ProductCatalogueSlide" }
+			}
+		],
+		$infoContainers = [
+			{
+				attributes: { "data-link": "http://thinkbioenergy.com"}
+			},
+			{
+				attributes: { "data-pdf": "pdf"}
+			},
+			{
+				attributes: { "data-link": "https://www.bioenergy-university.com/#/login"}
+			},
+			{
+				attributes: { "data-link": "https://www.orion.novozymes.com"}
+			}
+		];
+
+mixin addModule($content, $slide)
+	div(data-goto-slide=$slide.collection + "/" + $slide.slideshow  + "/" + $slide.id)
+		h1 !{$content.header}
+		p !{$content.text}
+
+mixin addInfo($content, $attr)
+	div
+		.info
+			h2 !{$content.header}
+			p !{$content.text}
+			.button-with-circle&attributes($attr)
+				.circle.arrow
+				p !{more_button}
+
+article#overview.page
+	.content-wrapper
+		.modules-container
+			each $module, index in text.modules
+				+addModule($module, $modules[index].slide)
+		.info-container
+			each $infoContainer, index in text.info
+				+addInfo($infoContainer, $infoContainers[index].attributes)

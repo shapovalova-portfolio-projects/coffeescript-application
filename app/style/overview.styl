@@ -1,0 +1,157 @@
+color_white           = #fff
+color_black           = #000
+color_gray            = #666
+
+color_dark_green      = #183323
+color_dark_green2     = #122d1d
+color_dark_gray		  = #3d4242
+color_dark_violet     = #2d0028
+color_dark_violet2    = #35072b
+color_green_yellow    = #c5da00
+color_green_yellow2   = #cddc29
+color_light_gray      = #c5cac4
+color_light_gray2     = #f5f5f5
+color_light_gray4     = #cecece
+color_light_gray3     = #eee
+
+
+color_red             = #ef4123
+color_blue            = #5087c7
+color_lt_blue         = #9fc7ef
+color_purple          = #727bda
+color_lt_purple       = #6d78dc
+color_light_blue      = #82c8ef
+color_light_blue2     = #a0c8f0
+color_dark_pink       = #800057
+color_green_gray      = #889382
+color_violet          = #7c51a1
+color_orange          = #fdb913
+color_green           = #425e17
+
+linear_gray_gradient		= linear-gradient(to top, rgba(color_light_gray2,0) 0%, rgba(color_dark_gray,.1) 80%, rgba(color_dark_gray,.1) 100%)
+
+$module1Background = {colour:color_green_yellow, image:"triangles.png",right:-123,bottom:10,width:310}
+$module2Background = {colour:color_light_blue2,image:"triangles.png",right:5,top:32,width:168}
+$modulesBackground = ($module1Background $module2Background)
+$infoBoxesBackground = ({image:"project-image3.jpg"}{image:"earth-satellite.jpg"}{colour:color_purple,image:"space-shuttle.png",left:34,bottom:53,width:100}{image:"space-station.jpg"})
+$imagesPath = "../images/overview/"
+$borderWidth = 4
+$borderWidthPx = unit($borderWidth, px)
+$halfBorderWidthPx = unit($borderWidth/ 2, px)
+
+setModulesBackground()
+	for $module, index in $modulesBackground
+		&:nth-of-type({index+1})
+			if index < 1
+				margin-right $halfBorderWidthPx
+			else
+				margin-left $halfBorderWidthPx
+			$colour = $module.colour
+			$path = $imagesPath+$module.image
+			$right = unit($module.right, px)
+			$width = unit($module.width, px)
+			background url($path) no-repeat, $colour
+			background-size $width auto
+			if $module.bottom
+				$bottom = unit($module.bottom, px)
+				background-position bottom $bottom right $right
+			else if $module.top
+				$top = unit($module.top, px)
+				background-position top $top right $right
+
+setInfoBoxesBackground()
+	for $infoBox, index in $infoBoxesBackground
+		&:nth-of-type({index+1})
+			if index < 2
+				margin-right $borderWidthPx
+			else if index > 2
+				margin-left $borderWidthPx
+			.info
+				$path = $imagesPath+$infoBox.image
+				if $infoBox.colour
+					$colour = $infoBox.colour
+					$bottom = unit($infoBox.bottom, px)
+					$left = unit($infoBox.left, px)
+					$width = unit($infoBox.width, px)
+					background url($path) bottom $bottom left $left / auto $width no-repeat, $colour
+				else
+					background url($path) bottom center / auto 100% no-repeat
+
+#overview
+	h1
+	h2
+	p
+		text-align left
+		color color_white
+	.content-wrapper
+		display flex
+		flex-direction column
+		height 100%
+		> div
+			display flex
+			width 100%
+	.modules-container
+		height 67%
+		margin-bottom $borderWidthPx
+		> div
+			setModulesBackground()
+			position relative
+			flex-direction column
+			padding 12px 55px 0 17px
+			width 50%
+			&:after
+				content ''
+				position absolute
+				left 0
+				top 0
+				width 100%
+				height 100%
+				background linear_gray_gradient
+		h1
+			margin-bottom 33px
+			font 700 50px / 1.1 Lato
+		p
+			font-size 21px
+	.info-container
+		height 33%
+		> div
+			setInfoBoxesBackground()
+			position relative
+			width 25%
+	.info
+		position absolute
+		padding 14px 10px 0 15px
+		left 0
+		bottom 0
+		height 100%
+		width 100%
+		box-shadow 0 0 0 $borderWidthPx color_white
+		h2
+			margin-bottom 31px
+			font 700 40px / 1.1 Lato
+		> p
+		.button-with-circle
+			display none
+		> p
+			font-size 16px
+		.button-with-circle
+			position absolute
+			padding 10px 0
+			left 0
+			bottom 0
+			width 100%
+			background rgba(color_white, .15)
+			font-size 15px
+			color color_white
+			.circle
+				border-color color_white
+				&:after
+					border-color color_white
+					border-width 4px
+		&.active
+			transition height 250ms linear
+			height 357px
+			> p
+				display block
+			.button-with-circle
+				display flex
