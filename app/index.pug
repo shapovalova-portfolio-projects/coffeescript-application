@@ -1,0 +1,15 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		title Portfolio
+		link(rel='stylesheet', href='style/style.css')
+	body
+		#pages
+			include layout/front.pug
+			include layout/map.pug
+			include layout/overview.pug
+		#menu
+			button.back
+			button.next
+	script(src='script/script.js')

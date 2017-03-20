@@ -1,0 +1,26 @@
+setFormatsPaths(fontFileName, formats)
+	src url(../fonts/ + fontFileName + '.' + formats[0])
+	for index in 1..3
+		if formats[index] == 'ttf'
+			$format = 'truetype'
+		else
+			$format = formats[index]
+		src url(../fonts/ + fontFileName + '.' + formats[index]) format($format)
+
+@font-face
+	font-family 'Audiowide'
+	setFormatsPaths('audiowide-regular-webfont', ( 'eot''woff' 'svg' 'ttf'))
+	font-style normal
+	font-weight 400
+
+@font-face
+	font-family 'Lato'
+	setFormatsPaths('lato-regular-webfont', ( 'eot''woff' 'svg' 'ttf'))
+	font-style normal
+	font-weight 400
+
+@font-face
+	font-family 'Nixieone'
+	setFormatsPaths('nixieone-regular-webfont', ( 'eot''woff' 'svg' 'ttf'))
+	font-style normal
+	font-weight 400
