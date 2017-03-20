@@ -60,34 +60,49 @@ $setblocksColors
 
 $setPlusElements
 	.plus
+		display none
 		top 50%
 		right 0
 		transform translate3d(0, -50%, 0)
 		width 21px
 		height @width
+		&:after
+			content '+'
+			position absolute
+			left 50%
+			top 50%
+			height auto
+			width auto
+			border none
+			transform translate3d(-50%, -50%, 0)
+			font 700 16px / 1 Arial
+			color white
 		&.active
 			transform rotate3d(0, 0, 1, 225deg) translate3d(0,-50%,0)
 
 $setArrowElements
 	.arrow
 		margin 10px
-		width 21px
+		top 0
+		width 30px
 		height @width
-		mask url(../../shared/images/arrow.png) top left / cover
 		&.back
+			display none
 			top 0
 			left 0
-			transform rotate(180deg)
-			background white
+			background #666
+			&.reset
+				display block
 		&.next
 			bottom 0
 			right 0
-			background #666
+			background #aab
 
 #map
 	@extends $setArrowElements
 	padding 23px 40px 73px 55px
 	background url(../images/map/map-background.jpg) center bottom / 100% auto no-repeat, black
+	font-family Audiowide
 	h1
 		margin-bottom 19px
 		padding 0 30px 0 0
@@ -135,7 +150,7 @@ $setArrowElements
 			font 400 .9rem / 1.1 Audiowide
 			color red
 		p
-			font 400 .92rem / 1.2 Audiowide
+			font 400 .92rem / 1.2 Lato
 			b
 				line-height 1.3
 		.tooltips-description
@@ -163,7 +178,7 @@ $setArrowElements
 			margin-top 1rem
 	.blocks-footer
 		position relative
-		height 10%
+		height 50px
 		background #e5e5e5
 
 	//	Steps style
@@ -187,6 +202,7 @@ $setArrowElements
 		flex-direction column
 	.steps-wrapper
 		width 100%
+		overflow hidden
 		opacity 0
 	.steps-done
 		width 24.9%
@@ -199,7 +215,7 @@ $setArrowElements
 		padding-left 50px
 		background #666666
 		p
-			font 400 22px / 1.75 Audiowide
+			font 400 22px / 1.75 Lato
 			color white
 	.state-wrapper
 		width 75%
@@ -219,12 +235,12 @@ $setArrowElements
 		li
 			margin-bottom 18px
 		h2
-			font 400 22.5px / 1.2 Audiowide
+			font 400 22.5px / 1.2 Lato
 		h3
-			font 400 22.5px / 1 Audiowide
+			font 400 22.5px / 1 Lato
 		p
 		li
-			font 400 17px / 1.4 Audiowide
+			font 400 17px / 1.4 Lato
 			color black
 		.back-block
 			position absolute
@@ -235,7 +251,7 @@ $setArrowElements
 			background green
 			p
 				margin-bottom 0
-				font 400 17px / 1.75 Audiowide
+				font 400 17px / 1.75 Lato
 				color white
 			.back
 				margin-left 18px
@@ -248,25 +264,24 @@ $setArrowElements
 		.resume
 			flex-grow 1
 			padding 13px 18px
-			min-width 233px
 			height 49.85%
 		.next-block
 			position relative
 			background #e5e5e5
 			border 1px solid #f5f5f5
 			p
-				font 400 22.5px / 1.3 Audiowide
+				font 400 22.5px / 1.3 Lato
 				color #666666
 		.resume
 			background lightyellow
 			border 1px solid orange
 			h2
 				margin-bottom 5px
-				font 400 22.5px / 1.3 Audiowide
+				font 400 22.5px / 1.3 Lato
 				color black
 			p
 				margin-bottom 3px
-				font 400 17px / 1.2 Audiowide
+				font 400 17px / 1.2 Lato
 	.steps-stack
 		flex-grow 1
 		display flex
@@ -290,7 +305,7 @@ $setArrowElements
 				line-height 1.2
 			p
 			li
-				font 400 14px / 1.2 Audiowide
+				font 400 14px / 1.2 Lato
 			p
 				margin 16px 0 21px 0
 			li
@@ -300,13 +315,13 @@ $setArrowElements
 		&.single-step
 			> div:first-of-type
 				flex-grow 1
-	&.state0
-		.blocks-wrapper
+	&.step0
+		.content-wrapper
 			@extends $showElement
 		.steps-wrapper
 			@extends $hideElement
 	&.steps-mode
-		.blocks-wrapper
+		.content-wrapper
 			@extends $hideElement
 		.steps-wrapper
 			@extends $showElement

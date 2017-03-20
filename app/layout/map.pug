@@ -49,7 +49,6 @@ mixin nextContent(stepsNext, stepResume)
 - var $nextSteps = ['step1','step7','step6','step7'];
 - var $stepBack = 'step5';
 - var tooltipsButtonClass = 'plus';
-- var tooltipsSlideNumber = '5_3';
 
 article#map.page(data-tooltip-overlay)
 	h1 !{text.headline}
@@ -69,7 +68,7 @@ article#map.page(data-tooltip-overlay)
 						each tooltip, ind in $blocks.content.tooltips
 							if ($blocks.content.tooltips[ind]==tooltip)
 								-
-									$blocks.content.tooltips[ind].number = tooltipsSlideNumber + "_" + (index + 1) + '_' + (ind + 1);
+									$blocks.content.tooltips[ind].number = (index + 1) + '_' + (ind + 1);
 									$blocks.content.tooltips[ind].position = $tooltipsPosition[index];
 									$blocks.content.tooltips[ind].colour = $tooltipsColours[index];
 									$blocks.content.tooltips[ind].buttonClass = tooltipsButtonClass;

@@ -1,18 +1,20 @@
 class MapPage
   constructor: (id)->
     @page = window.structure.pages[id]
-    @firstStep = 'step1'
+    @firstStep = 'step0'
     @stepsStackDomElement = @page.getElementsByClassName('steps-stack')[0]
-    @addButtonsEventListener(['next', 'back', 'reset'], ['goToNextStep', 'goToPreviousStep', 'goToPreviousStep'])
+    @addButtonsEventListener(['next', 'back'], ['goToNextStep', 'goToPreviousStep'])
     @history = window.History
     @history.getAllStepsData(id)
+    @changeStepTo @firstStep
 
   addButtonsEventListener: (buttons, methods)->
-    buttons.forEach (button, index) =>
-      buttonElement = @page.getElementsByClassName(button)[0]
-      buttonElement.addEventListener 'tap', ()=>
-        debugger
-        @[methods[index]]()
+    buttons.forEach (buttonsClass, index) =>
+      buttonElements = @page.getElementsByClassName(buttonsClass)
+      buttonElements.forEach (button) =>
+        button.addEventListener 'click', ()=>
+          console.log methods[index]
+          @[methods[index]]()
 
   checkMode: ()->
     unless @page.classList.contains "steps-mode" then @page.classList.add "steps-mode"
@@ -94,7 +96,7 @@ class MapPage
       buttonIndex = event.target.attributes['data-button-index']?.value
       step = @history.currentStep.next[buttonIndex]
     @history.stepNext step
-    @changeStepTo step
+    @goToStep step
 
   goToPreviousStep: ()->
     step = event.target.attributes['data-goto-step']?.value
@@ -102,7 +104,7 @@ class MapPage
       @resetToInitial()
     else
       step = @history.stepBack(step).id
-      @changeStepTo step
+    @goToStep step
 
   changeStepTo: (step)->
     @page.classList.remove @page.currentStep
