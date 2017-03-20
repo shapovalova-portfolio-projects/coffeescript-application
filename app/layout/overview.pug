@@ -10,16 +10,16 @@ include text/overview-text
 		],
 		$infoContainers = [
 			{
-				attributes: { "data-link": "http://thinkbioenergy.com"}
+				attributes: { "href": "https://www.wikipedia.org/"}
 			},
 			{
-				attributes: { "data-pdf": "pdf"}
+				attributes: { "href": "https://www.wikipedia.org/"}
 			},
 			{
-				attributes: { "data-link": "https://www.bioenergy-university.com/#/login"}
+				attributes: { "href": "https://www.wikipedia.org/"}
 			},
 			{
-				attributes: { "data-link": "https://www.orion.novozymes.com"}
+				attributes: { "href": "https://www.wikipedia.org/"}
 			}
 		];
 
@@ -33,7 +33,7 @@ mixin addInfo($content, $attr)
 		.info
 			h2 !{$content.header}
 			p !{$content.text}
-			.button-with-circle&attributes($attr)
+			a.button-with-circle&attributes($attr)
 				.circle.arrow
 				p !{more_button}
 

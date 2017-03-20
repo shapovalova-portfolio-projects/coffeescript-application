@@ -2,14 +2,19 @@ class OverviewPage
   constructor: (id)->
     @page = window.structure.pages[id]
     infoElements = @page.getElementsByClassName "info"
+    moduleElements = @page.getElementsByClassName("modules-container")[0].children
     @activeElement = null
-    debugger
+    moduleElements[0].addEventListener "click", ()=>
+      window.structure.goToPrevPage()
+    moduleElements[1].addEventListener "click", ()=>
+      window.structure.goToNextPage()
     infoElements.forEach (infoElement)=>
       infoElement.addEventListener "click", ()=>
         @setActive infoElement
-#
-#  onExit: (element)->
-#    do @disableActive
+    window.structure.menuBack.addEventListener "click", ()=>
+      do @disableActive
+    window.structure.menuNext.addEventListener "click", ()=>
+      do @disableActive
 
   disableActive: ()->
     @activeElement?.classList.remove "active"

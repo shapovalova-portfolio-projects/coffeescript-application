@@ -30,8 +30,8 @@ color_green           = #425e17
 
 linear_gray_gradient		= linear-gradient(to top, rgba(color_light_gray2,0) 0%, rgba(color_dark_gray,.1) 80%, rgba(color_dark_gray,.1) 100%)
 
-$module1Background = {colour:color_green_yellow, image:"triangles.png",right:-123,bottom:10,width:310}
-$module2Background = {colour:color_light_blue2,image:"triangles.png",right:5,top:32,width:168}
+$module1Background = {colour:color_green_yellow}
+$module2Background = {colour:color_light_blue2}
 $modulesBackground = ($module1Background $module2Background)
 $infoBoxesBackground = ({image:"project-image3.jpg"}{image:"earth-satellite.jpg"}{colour:color_purple,image:"space-shuttle.png",left:34,bottom:53,width:100}{image:"space-station.jpg"})
 $imagesPath = "../images/overview/"
@@ -47,17 +47,7 @@ setModulesBackground()
 			else
 				margin-left $halfBorderWidthPx
 			$colour = $module.colour
-			$path = $imagesPath+$module.image
-			$right = unit($module.right, px)
-			$width = unit($module.width, px)
-			background url($path) no-repeat, $colour
-			background-size $width auto
-			if $module.bottom
-				$bottom = unit($module.bottom, px)
-				background-position bottom $bottom right $right
-			else if $module.top
-				$top = unit($module.top, px)
-				background-position top $top right $right
+			background $colour
 
 setInfoBoxesBackground()
 	for $infoBox, index in $infoBoxesBackground
@@ -75,7 +65,7 @@ setInfoBoxesBackground()
 					$width = unit($infoBox.width, px)
 					background url($path) bottom $bottom left $left / auto $width no-repeat, $colour
 				else
-					background url($path) bottom center / auto 100% no-repeat
+					background url($path) bottom center / auto 357px no-repeat
 
 #overview
 	h1
@@ -126,6 +116,7 @@ setInfoBoxesBackground()
 		height 100%
 		width 100%
 		box-shadow 0 0 0 $borderWidthPx color_white
+		box-sizing border-box
 		h2
 			margin-bottom 31px
 			font 700 40px / 1.1 Lato
@@ -138,7 +129,7 @@ setInfoBoxesBackground()
 			position absolute
 			padding 10px 0
 			left 0
-			bottom 0
+			bottom 70px
 			width 100%
 			background rgba(color_white, .15)
 			font-size 15px
