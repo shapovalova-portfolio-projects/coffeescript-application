@@ -1,0 +1,386 @@
+$blocksHeight = 400px
+$tooltipsTopPosition = (179 214 249) (179 214) (162 197 232)
+$setTooltipsTopPosition
+	figure
+		for $figureTooltips, index in $tooltipsTopPosition
+			&:nth-of-type({index+1})
+				.ah-tooltip
+					for $top, ind in $figureTooltips
+						&:nth-child({ind+1})
+							.tooltip
+								top unit($top, px)
+
+$steps = 'step1' 'step2' 'step3' 'step4' 'step5' 'step6' 'step7' 'step8' 'step9' 'step10' 'step11' 'step12' 'step13' 'step14' 'step15'
+$hideElement
+	&
+		display none
+		pointer-events none
+$showElement
+	&
+		display flex
+		pointer-events auto
+$showStepsOnStateChange
+	for $step in $steps
+		&.state-
+			&{$step}
+				.steps-wrapper
+					opacity 1
+				$dataStep = 'data-step=' + $step
+				.step[{$dataStep}]
+					@extends $showElement
+
+$setblocksColors
+	figure
+		&.non-ige
+			figcaption
+				background orange
+			.blocks
+				border-color orange
+			.plus
+				background orange
+		&.mild.non-ige
+			.blocks
+				background yellow
+		&.severe.non-ige
+			.blocks
+				background yellow
+		&.mild.ige
+			figcaption
+				background #5e95c9
+			.blocks
+				background lightblue
+				border-color #5e95c9
+			.plus
+				background #5e95c9
+		&.severe.ige
+			figcaption
+				background #4967AB
+			.blocks
+				background lightblue
+				border-color #4967AB
+
+$setPlusElements
+	.plus
+		top 50%
+		right 0
+		transform translate3d(0, -50%, 0)
+		width 21px
+		height @width
+		mask url(../../shared/images/plus.png) top left / cover
+		&.active
+			mask url(../../shared/images/minus.png) top left / cover
+
+$setArrowElements
+	.arrow
+		margin 10px
+		width 21px
+		height @width
+		mask url(../../shared/images/arrow.png) top left / cover
+		&.back
+			top 0
+			left 0
+			transform rotate(180deg)
+			background white
+		&.next
+			bottom 0
+			right 0
+			background #666666
+
+#map
+	@extends $setArrowElements
+	padding 23px 40px 73px 55px
+	h1
+		margin-bottom 19px
+		padding 0 30px 0 0
+		font 400 1.64rem / 1.35 Audiowide
+	b
+		font-weight 400
+	.lead-text
+		margin-bottom 30px
+		font-size 1.25rem
+	.no-wrap
+		white-space nowrap
+	.content-wrapper
+	figure
+		justify-content space-between
+	.content-wrapper
+		@extends $setblocksColors
+		@extends $setTooltipsTopPosition
+		display flex
+		width 100%
+	figure
+		@extends $setPlusElements
+		display flex
+		flex-direction column
+		width 24.9%
+		height $blocksHeight
+		color black
+		figcaption
+			height 18.2%
+			padding 13px 10px
+			font 400 1.1rem / 1 Audiowide
+		&.mild.ige
+			.tooltip
+				width 240px
+	.blocks
+		position relative
+		padding 16px 8px
+		height 70.6%
+		border 1px solid transparent
+		h2
+		p
+			margin-bottom 18px
+		h2
+			font 400 .9rem / 1.1 Audiowide
+			color red
+		p
+			font 400 .92rem / 1.2 Audiowide
+			b
+				line-height 1.3
+		.tooltips-description
+			margin-bottom 14px
+	.item-with-tooltip
+		display flex
+		align-items center
+		position relative
+		margin-bottom 14px
+		padding-right 23px
+		width 100%
+		height 21px
+		p
+			margin-bottom 0
+			font-weight 400
+	.tooltip
+		margin-left 7px
+		width 258px
+		p
+			font-weight 400
+			line-height 1.25
+			margin-bottom 0
+		.tooltip-note
+			margin-top 1rem
+	.blocks-footer
+		position relative
+		height 10%
+		background #e5e5e5
+
+	//	Steps style
+	.step
+		@extends $hideElement
+		color black
+	.steps-wrapper
+	.step
+	.steps-done
+	.right-navigation
+		justify-content space-between
+		pointer-events auto
+	.steps-wrapper
+	.restart
+	.back-block
+	.steps-done
+	.right-navigation
+		display flex
+	.steps-done
+	.right-navigation
+		flex-direction column
+	.steps-wrapper
+		width 100%
+		opacity 0
+	.steps-done
+		width 24.9%
+	.restart
+	.back-block
+		align-items center
+		height 40px
+	.restart
+		position relative
+		padding-left 50px
+		background #666666
+		p
+			font 400 22px / 1.75 Audiowide
+			color white
+	.state-wrapper
+		width 75%
+	.step-content
+		flex-grow 1
+		position relative
+		margin 0 0.15%
+		padding 17px
+		height $blocksHeight
+		min-width 66.5%
+		max-width 92.5%
+		background yellow
+		border 1px solid orange
+		h2
+		h3
+		p
+		li
+			margin-bottom 18px
+		h2
+			font 400 22.5px / 1.2 Audiowide
+		h3
+			font 400 22.5px / 1 Audiowide
+		p
+		li
+			font 400 17px / 1.4 Audiowide
+			color black
+		.back-block
+			position absolute
+			padding-left 55px
+			top 0
+			left 0
+			width 100%
+			background green
+			p
+				margin-bottom 0
+				font 400 17px / 1.75 Audiowide
+				color white
+			.back
+				margin-left 18px
+		.bullet-list
+			margin-bottom 22px
+			padding-right 20px
+	.right-navigation
+		width 36.5%
+		.next-block
+		.resume
+			flex-grow 1
+			padding 13px 18px
+			min-width 233px
+			height 49.85%
+		.next-block
+			position relative
+			background #e5e5e5
+			border 1px solid #f5f5f5
+			p
+				font 400 22.5px / 1.3 Audiowide
+				color #666666
+		.resume
+			background lightyellow
+			border 1px solid orange
+			h2
+				margin-bottom 5px
+				font 400 22.5px / 1.3 Audiowide
+				color black
+			p
+				margin-bottom 3px
+				font 400 17px / 1.2 Audiowide
+	.steps-stack
+		flex-grow 1
+		display flex
+		flex-direction column
+		justify-content space-between
+		height 90%
+		color black
+		> div
+			flex-grow 1
+			position relative
+			margin-top 1%
+			min-height 10%
+			max-height 100%
+			padding 13px 20px 0 9px
+			background orange
+			&:first-of-type
+				flex-grow 0
+			h2
+				margin 0 0 8px 41px
+				font-size 17px
+				line-height 1.2
+			p
+			li
+				font 400 14px / 1.2 Audiowide
+			p
+				margin 16px 0 21px 0
+			li
+				font-weight 400
+
+	.steps-stack
+		&.single-step
+			> div:first-of-type
+				flex-grow 1
+	&.state0
+		.blocks-wrapper
+			@extends $showElement
+		.steps-wrapper
+			@extends $hideElement
+	&.steps-mode
+		.blocks-wrapper
+			@extends $hideElement
+		.steps-wrapper
+			@extends $showElement
+	@extends $showStepsOnStateChange
+	&.step4
+	&.step11
+		.next-block
+			&:first-of-type
+				background lightgreen
+				border 1px solid green
+				.next
+					margin-right 20px
+				p
+					color black
+					br
+						line-height 2
+				small
+					display block
+					font-weight 400
+	&.step5
+	&.step13
+	&.step14
+	&.step15
+		.steps-stack
+			div:last-of-type
+				padding 8px
+				background green
+				color white
+				h2
+					margin-bottom 0
+	&.step5
+		.step-content
+			background lightgreen
+			border 1px solid green
+		.next-block
+			&:nth-of-type(3)
+				padding-top 8px
+	&.step6
+		.steps-stack
+			> div
+				background #66a1dd
+		.step-content
+			background lightblue
+			border 1px solid #5e95c9
+			p
+			li
+				margin-bottom 12px
+			h2
+			h3
+				margin-bottom 0
+			h3
+				font-weight 400
+	&.step7
+		.steps-stack
+			> div
+				background #66a1dd
+	&.step12
+		.bullet-list
+			margin-bottom 60px
+	&.step13
+	&.step14
+	&.step15
+		.step-content
+			padding-top 58px
+			background lightgreen
+			border 1px solid green
+	&.step14
+	&.step15
+		.resume
+			background lightgreen
+			border 1px solid green
+			&:nth-of-type(2)
+				padding-top 10px
+				h2
+					margin-bottom 0
+	&.step5
+		.next-block
+		.resume
+			height 32.9%

@@ -1,0 +1,94 @@
+include ../functionality/tooltip/tooltip
+include text/map-text
+
+mixin createList($list)
+	ul.bullet-list
+		each $li in $list
+			li !{$li}
+
+mixin stepContent(stepContent, stepBack)
+	.step-content
+		if stepBack
+			.back-block
+				button.arrow.back(data-goto-step=stepBack.id)
+				p !{stepBack.text}
+		if stepContent.sub_header
+			h3 !{stepContent.sub_header}
+		if stepContent.header
+			h2 !{stepContent.header}
+		if stepContent.list
+			+createList(stepContent.list)
+		if stepContent.text
+			each $paragraph in stepContent.text
+				p !{$paragraph}
+		if stepContent.lists
+			each $listContent in stepContent.lists
+				h2 !{$listContent.header}
+				+createList($listContent.list)
+
+mixin nextContent(stepsNext, stepResume)
+	if stepsNext || stepResume
+		.right-navigation
+			if stepsNext
+				each nextStep, index in stepsNext
+					.next-block
+						p !{nextStep.text}
+						button.arrow.next(data-button-index=index)
+			if stepResume
+				each resume in stepResume
+					.resume
+						if resume.caption
+							h2 !{resume.caption}
+						if resume.text
+							each $paragraph in resume.text
+								p !{$paragraph}
+
+- var $blocksClasses = ['mild non-ige','severe non-ige','mild ige','severe ige'];
+- var $tooltipsPosition = ['right','right','right',''];
+- var $tooltipsColours = ['light-yellow','yellow','light-blue','blue'];
+- var $nextSteps = ['step1','step7','step6','step7'];
+- var $stepBack = 'step5';
+- var tooltipsButtonClass = 'plus';
+- var tooltipsSlideNumber = '5_3';
+
+article#map.page(data-tooltip-overlay)
+	h1 !{text.headline}
+	p.lead-text !{text.lead_paragraph}
+	.content-wrapper
+		each $blocks, index in text.blocks
+			figure(class=$blocksClasses[index])
+				figcaption !{$blocks.caption}
+				.blocks
+					if $blocks.content.header
+						h2 !{$blocks.content.header}
+					each paragraph in $blocks.content.text
+						p !{paragraph}
+					if $blocks.content.tooltips_description
+						p.tooltips-description !{$blocks.content.tooltips_description}
+					if $blocks.content.tooltips
+						each tooltip, ind in $blocks.content.tooltips
+							if ($blocks.content.tooltips[ind]==tooltip)
+								-
+									$blocks.content.tooltips[ind].number = tooltipsSlideNumber + "_" + (index + 1) + '_' + (ind + 1);
+									$blocks.content.tooltips[ind].position = $tooltipsPosition[index];
+									$blocks.content.tooltips[ind].colour = $tooltipsColours[index];
+									$blocks.content.tooltips[ind].buttonClass = tooltipsButtonClass;
+							+addTooltipButton(tooltip)
+						.tooltips
+							each tooltip in $blocks.content.tooltips
+								+addTooltip(tooltip)
+				.blocks-footer
+					button.arrow.next(data-goto-step=$nextSteps[index])
+	.steps-wrapper
+		.steps-done
+			.restart
+				button.arrow.back.reset
+				p !{text.restart}
+			.steps-stack
+		.state-wrapper
+			each $step, key in text.steps
+				.step(data-step=key)
+					if $step.back
+						- $step.back.id = $stepBack
+					+stepContent($step.content, $step.back)
+					+nextContent($step.next, $step.resume)
