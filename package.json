@@ -1,0 +1,41 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test yet\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nastikue/portfolio.git"
+  },
+  "keywords": [
+    "shapovalova",
+    "portfolio",
+    "js",
+    "coffee",
+    "html",
+    "jade",
+    "css",
+    "css3",
+    "styl",
+    "gulp"
+  ],
+  "author": "a.shapovalova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nastikue/portfolio/issues"
+  },
+  "homepage": "https://github.com/nastikue/portfolio#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-coffee": "^2.3.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-inject": "^4.2.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-stylus": "^2.6.0"
+  }
+}
