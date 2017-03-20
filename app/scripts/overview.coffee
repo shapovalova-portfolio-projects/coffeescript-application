@@ -11,10 +11,8 @@ class OverviewPage
     infoElements.forEach (infoElement)=>
       infoElement.addEventListener "click", ()=>
         @setActive infoElement
-    window.structure.menuBack.addEventListener "click", ()=>
-      do @disableActive
-    window.structure.menuNext.addEventListener "click", ()=>
-      do @disableActive
+    @addModuleElementsEventListener(moduleElements, ['goToPrevPage', 'goToNextPage'])
+    @addExitEventListener([window.structure.menuBack, window.structure.menuNext])
 
   disableActive: ()->
     @activeElement?.classList.remove "active"
@@ -25,5 +23,15 @@ class OverviewPage
       do @disableActive
       tappedElement.classList.add "active"
       @activeElement = tappedElement
+
+  addModuleElementsEventListener: (moduleElements, methods)->
+    moduleElements.forEach (moduleElement, index) =>
+      moduleElement.addEventListener 'click', ()=>
+        @[methods[index]]()
+
+  addExitEventListener: (menuButtons)->
+    menuButtons.forEach (menuButton) =>
+      menuButton.addEventListener 'click', ()=>
+        do @disableActive
 
 overviewPage = new OverviewPage('overview')

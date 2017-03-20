@@ -4,6 +4,7 @@ class MapPage
     @firstStep = 'step0'
     @stepsStackDomElement = @page.getElementsByClassName('steps-stack')[0]
     @addButtonsEventListener(['next', 'back'], ['goToNextStep', 'goToPreviousStep'])
+    @addExitEventListener([window.structure.menuBack, window.structure.menuNext])
     @history = window.History
     @history.getAllStepsData(id)
     @changeStepTo @firstStep
@@ -13,15 +14,19 @@ class MapPage
       buttonElements = @page.getElementsByClassName(buttonsClass)
       buttonElements.forEach (button) =>
         button.addEventListener 'click', ()=>
-          console.log methods[index]
           @[methods[index]]()
+
+  addExitEventListener: (menuButtons)->
+    menuButtons.forEach (menuButton) =>
+      menuButton.addEventListener 'click', ()=>
+        do @resetToInitial
 
   checkMode: ()->
     unless @page.classList.contains "steps-mode" then @page.classList.add "steps-mode"
 
   resetToInitial: ()->
     @history.clear()
-    @changeStepTo @firstStep
+    do @goToFirstStep
     @page.classList.remove "steps-mode"
 
   clearStepsStackElement: ()->
@@ -38,6 +43,9 @@ class MapPage
     backButton.setAttribute('data-goto-step', dataAttributeValue)
     backButton.classList.add 'arrow'
     backButton.classList.add 'back'
+    backButton.addEventListener 'click', ()=>
+      @goToPreviousStep()
+      event.preventDefault()
     backButton
 
   createParagraph: (text)->
@@ -84,6 +92,9 @@ class MapPage
       @stepsStackDomElement.appendChild stepElement
     if @history.steps.length is 1 then @stepsStackDomElement.classList.add("single-step")
 
+  goToFirstStep: ()->
+    @changeStepTo @firstStep
+
   goToStep: (step)->
     if step
       @changeStepTo step
@@ -104,7 +115,7 @@ class MapPage
       @resetToInitial()
     else
       step = @history.stepBack(step).id
-    @goToStep step
+      @goToStep step
 
   changeStepTo: (step)->
     @page.classList.remove @page.currentStep
