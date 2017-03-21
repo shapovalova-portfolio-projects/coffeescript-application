@@ -1,7 +1,7 @@
 # Portfolio
 Authour: Anastasiya Shapovalova
 
-In order to build project (Node JS, npm are required):
+In order to build project (Node.JS, npm are required):
 1. Clone or download project.
 2. From project folder run in command line:
     npm i && npm i gulp
