@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "gulp-inject": "^4.2.0",
     "gulp-jade": "^1.1.0",
     "gulp-pug": "^3.3.0",
-    "gulp-stylus": "^2.6.0"
+    "gulp-stylus": "^2.6.0",
+    "gulp-zip": "^4.0.0"
   }
 }
