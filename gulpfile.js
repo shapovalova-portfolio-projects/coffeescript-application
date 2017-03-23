@@ -4,16 +4,17 @@ var gulp = require('gulp'),
     pug = require('gulp-pug'),
     concat = require('gulp-concat'),
     inject = require('gulp-inject'),
-    del = require('del');
+    del = require('del'),
+    zip = require('gulp-zip');
 
 gulp.task('clean', function() {
-    return del.sync('dist');
+    return del.sync(['dist.zip', 'dist']);
 });
 
 gulp.task('coffee', function() {
-    return gulp.src(['./app/functionality/**/*.coffee', './app/main.coffee', './app/scripts/*.coffee'])
-        .pipe(coffee())
+    return gulp.src(['./app/scripts/classes/*.coffee', './app/functionality/**/*.coffee', './app/main.coffee', './app/scripts/*.coffee'])
         .pipe(concat('script.js'))
+        .pipe(coffee())
         .pipe(gulp.dest('./dist/script/'));
 });
 
@@ -47,6 +48,11 @@ gulp.task('jsons', function() {
         .pipe(gulp.dest('./dist/jsons/'));
 });
 
-gulp.task('build-project', ['clean', 'jsons', 'coffee', 'stylus', 'pug', 'font', 'images'], function (){
-    console.log('Building files');
-})
+gulp.task('build', ['clean', 'jsons', 'coffee', 'stylus', 'pug', 'font', 'images'], function (){
+});
+
+gulp.task('build-project', ['build'], function (){
+    return gulp.src('dist/**')
+        .pipe(zip('dist.zip'))
+        .pipe(gulp.dest('./'))
+});
