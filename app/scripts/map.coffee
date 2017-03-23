@@ -1,30 +1,18 @@
-class MapPage
+class MapPage extends Page
   constructor: (id)->
-    @page = window.structure.pages[id]
+    super id
     @firstStep = 'step0'
     @stepsStackDomElement = @page.getElementsByClassName('steps-stack')[0]
-    @addButtonsEventListener(['next', 'back'], ['goToNextStep', 'goToPreviousStep'])
-    @addExitEventListener([window.structure.menuBack, window.structure.menuNext])
+    @addAllElementsWithClassEventListener(['next', 'back'], [@goToNextStep, @goToPreviousStep])
+    @addExitEventListener @resetToInitial
     @history = window.History
     @history.getAllStepsData(id)
     @changeStepTo @firstStep
 
-  addButtonsEventListener: (buttons, methods)->
-    buttons.forEach (buttonsClass, index) =>
-      buttonElements = @page.getElementsByClassName(buttonsClass)
-      buttonElements.forEach (button) =>
-        button.addEventListener 'click', ()=>
-          @[methods[index]]()
-
-  addExitEventListener: (menuButtons)->
-    menuButtons.forEach (menuButton) =>
-      menuButton.addEventListener 'click', ()=>
-        do @resetToInitial
-
   checkMode: ()->
     unless @page.classList.contains "steps-mode" then @page.classList.add "steps-mode"
 
-  resetToInitial: ()->
+  resetToInitial: ()=>
     @history.clear()
     do @goToFirstStep
     @page.classList.remove "steps-mode"
@@ -101,7 +89,7 @@ class MapPage
       @updateStepsStack()
       @checkMode()
 
-  goToNextStep: ()->
+  goToNextStep: ()=>
     step = event.target.attributes['data-goto-step']?.value
     unless step
       buttonIndex = event.target.attributes['data-button-index']?.value
@@ -109,7 +97,7 @@ class MapPage
     @history.stepNext step
     @goToStep step
 
-  goToPreviousStep: ()->
+  goToPreviousStep: ()=>
     step = event.target.attributes['data-goto-step']?.value
     if !step or step is @history.steps[0].id
       @resetToInitial()

@@ -1,37 +1,25 @@
-class OverviewPage
+class OverviewPage extends Page
   constructor: (id)->
-    @page = window.structure.pages[id]
-    infoElements = @page.getElementsByClassName "info"
+    super id
     moduleElements = @page.getElementsByClassName("modules-container")[0].children
     @activeElement = null
-    moduleElements[0].addEventListener "click", ()=>
-      window.structure.goToPrevPage()
-    moduleElements[1].addEventListener "click", ()=>
-      window.structure.goToNextPage()
-    infoElements.forEach (infoElement)=>
-      infoElement.addEventListener "click", ()=>
-        @setActive infoElement
-    @addModuleElementsEventListener(moduleElements, ['goToPrevPage', 'goToNextPage'])
-    @addExitEventListener([window.structure.menuBack, window.structure.menuNext])
+    @addAllElementsWithClassEventListener ["info"], [@setActive]
+    @addElementsEventListener moduleElements, [@goToPage, @goToPage]
+    @addExitEventListener @disableActive
 
-  disableActive: ()->
+  disableActive: ()=>
     @activeElement?.classList.remove "active"
     @activeElement = null
 
-  setActive: (tappedElement)->
+  setActive: (tappedElement)=>
     unless tappedElement.classList.contains "active"
       do @disableActive
       tappedElement.classList.add "active"
       @activeElement = tappedElement
 
-  addModuleElementsEventListener: (moduleElements, methods)->
-    moduleElements.forEach (moduleElement, index) =>
-      moduleElement.addEventListener 'click', ()=>
-        @[methods[index]]()
-
-  addExitEventListener: (menuButtons)->
-    menuButtons.forEach (menuButton) =>
-      menuButton.addEventListener 'click', ()=>
-        do @disableActive
+  goToPage: (element)->
+    pageId = element.attributes['data-page'].value
+    index = window.structure.getPageIndexById pageId
+    window.structure.goToPage index
 
 overviewPage = new OverviewPage('overview')

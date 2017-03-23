@@ -2,10 +2,10 @@ include text/overview-text
 -
 	var $modules = [
 			{
-				slide: { collection: "your_data_collection",  slideshow: "your_data_slideshow", id: "YourDataSlide" }
+				attributes: { "data-page": "front"}
 			},
 			{
-				slide: { collection: "product_catalogue_collection", slideshow: "product_catalogue_slideshow", id: "ProductCatalogueSlide" }
+				attributes: { "data-page": "map"}
 			}
 		],
 		$infoContainers = [
@@ -23,8 +23,8 @@ include text/overview-text
 			}
 		];
 
-mixin addModule($content, $slide)
-	div(data-goto-slide=$slide.collection + "/" + $slide.slideshow  + "/" + $slide.id)
+mixin addModule($content, $attr)
+	div&attributes($attr)
 		h1 !{$content.header}
 		p !{$content.text}
 
@@ -41,7 +41,7 @@ article#overview.page
 	.content-wrapper
 		.modules-container
 			each $module, index in text.modules
-				+addModule($module, $modules[index].slide)
+				+addModule($module, $modules[index].attributes)
 		.info-container
 			each $infoContainer, index in text.info
 				+addInfo($infoContainer, $infoContainers[index].attributes)
