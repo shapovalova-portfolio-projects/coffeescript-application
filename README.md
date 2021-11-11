@@ -1,5 +1,5 @@
 # Portfolio
-Authour: Anastasiya Shapovalova
+Authour: Anastasiia Shapovalova
 
 In order to build project (Node.JS, npm are required):
 1. Clone or download project.
