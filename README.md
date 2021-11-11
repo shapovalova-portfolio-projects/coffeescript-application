@@ -1,4 +1,4 @@
-# Portfolio
+# Html/CSS/JS/Coffeescript project
 Authour: Anastasiia Shapovalova
 
 In order to build project (Node.JS, npm are required):
