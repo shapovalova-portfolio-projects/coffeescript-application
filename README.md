@@ -1,4 +1,4 @@
-# Coffeescript application
+# CoffeeScript application
 Authour: Anastasiia Shapovalova
 
 ## Technologies
@@ -6,6 +6,8 @@ Authour: Anastasiia Shapovalova
 1. CSS
 1. JS
 1. Coffeescript
+1. Pug JS
+1. Stylus
 
 In order to build project (Node.JS, npm are required):
 1. Clone or download project.
