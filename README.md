@@ -1,5 +1,11 @@
-# Html/CSS/JS/Coffeescript project
+# Coffeescript application
 Authour: Anastasiia Shapovalova
+
+## Technologies
+1. Html
+1. CSS
+1. JS
+1. Coffeescript
 
 In order to build project (Node.JS, npm are required):
 1. Clone or download project.
